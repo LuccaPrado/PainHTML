@@ -1,0 +1,57 @@
+<meta charset="UTF-8">
+ <select>
+  <option value="quadrado">quadrado</option>
+  <option value="circulo">circulo</option>
+</select> 
+<input type="color">
+<input id="tam">
+
+<canvas width = "600" height = "400" > < /canvas>
+
+<script>
+
+
+	
+    var tela = document.querySelector("canvas");
+	var pincel = tela.getContext('2d');
+	var mousera = false;
+
+
+	function liga(){
+		mousera = true;
+	}
+	function desliga(){
+		mousera = false;
+	}
+function colorir(evento) {
+	
+			if(mousera){
+			var inpu = document.querySelector("input");
+			var cor = inpu.value;
+			var forma = document.querySelector("select");
+			var tamanho = document.querySelector("#tam").value;
+			var xlin = evento.pageX - tela.offsetLeft;
+			var ycol = evento.pageY - tela.offsetTop;
+            pincel.fillStyle = cor;
+			if(forma.value == "quadrado"){
+            pincel.fillRect(xlin, ycol, tamanho, tamanho);
+            pincel.fill();
+			}else{
+			pincel.beginPath();
+			pincel.arc(xlin, ycol, tamanho/2, 0, 2 * 3.14);
+			pincel.fill();
+
+			}
+   }
+	
+	//alert(onmousedown);
+
+}
+tela.onmousedown = liga;
+tela.onmouseup = desliga;
+tela.onmousemove = colorir;
+
+
+
+
+</script>
